@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,28 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <h1>Testing testing</h1>
-    <p>Total points: <span id="totalPoints">0</span></p>
+    <p>Chicken:
+        <span id="chickensPoints">0</span>
+        <span onclick="changePoints('chicken', 1)">+</span>
+        <span onclick="changePoints('chicken', 0)">-</span>
+    </p>
+
+    <p>Bread:
+        <span id="breadPoints">0</span>
+        <span onclick="changePoints('bread', 1)">+</span>
+        <span onclick="changePoints('bread', 0)">-</span>
+    </p>
+
+    <p>Apple:
+        <span id="applesPoints">0</span>
+        <span onclick="changePoints('apple', 1)">+</span>
+        <span onclick="changePoints('apple', 0)">-</span>
+    </p>
+    <p>Total points: <span id="totalPoints">0</span>
+    </p>
 </body>
+
 </html>
