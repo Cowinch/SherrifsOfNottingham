@@ -16,42 +16,82 @@ let apple = 0,
     rooster = 0
 
 
-function render(){
+function render() {
     document.getElementById('totalPoints').innerHTML = total
     document.getElementById('chickensPoints').innerHTML = chicken
     document.getElementById('breadPoints').innerHTML = bread
     document.getElementById('applesPoints').innerHTML = apple
 }
 
-function getTotal(){
+function getTotal() {
     total = (apple * 2) + (chicken * 4) + (cheese * 3) + (bread * 3) + (pepper * 6) + (silk * 7) + (mead * 8) + (crossbow * 9)
 }
 
-function changePoints(item, positive){
-    switch(item){
+function changePoints(item, positive) {
+    switch (item) {
         case 'apple':
-            positive===1 ? apple++ : apple--
+            if (positive === 1) {
+                apple++
+            }
+            else if (apple>0){
+                apple--
+            }
             break
         case 'chicken':
-            positive===1 ? chicken++ : chicken--
+            if (positive === 1) {
+                chicken++
+            }
+            else if (chicken>0){
+                chicken--
+            }
             break
         case 'cheese':
-            positive===1 ? cheese++ : cheese--
+            if (positive === 1) {
+                cheese++
+            }
+            else if (cheese>0){
+                cheese--
+            }
             break
         case 'bread':
-            positive===1 ? bread++ : bread--
+            if (positive === 1) {
+                bread++
+            }
+            else if (bread>0){
+                bread--
+            }
             break
         case 'pepper':
-            positive===1 ? pepper++ : pepper--
+            if (positive === 1) {
+                pepper++
+            }
+            else if (pepper>0){
+                pepper--
+            }
             break
         case 'silk':
-            positive===1 ? silk++ : silk--
+            if (positive === 1) {
+                silk++
+            }
+            else if (silk>0){
+                silk--
+            }
             break
         case 'mead':
-            positive===1 ? mead++ : mead--
+            if (positive === 1) {
+                mead++
+            }
+            else if (mead>0){
+                mead--
+            }
             break
         case 'crossbow':
-            positive===1 ? crossbow++ : crossbow--
+            if (positive === 1) {
+                crossbow++
+            }
+            else if (crossbow>0){
+                crossbow--
+            }
             break
         default:
             return
@@ -62,4 +102,3 @@ function changePoints(item, positive){
 }
 
 render()
-    
