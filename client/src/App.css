@@ -5,12 +5,16 @@
   font-family: sans-serif;
 }
 
+:root{
+  --side-card-height: 0;
+}
+
 html{
   color-scheme: dark light;
 }
 
 body{
-  background-color: rgb(22, 22, 22);
+  background-color: rgb(32, 32, 32);
 }
 
 #main{
@@ -18,14 +22,40 @@ body{
   height: 100svh;
 }
 
-#column-one{
-  outline: 1px solid white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.inactive{
 
 }
 
-#coulnm-two{
+#column-one{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  background-color: #2b2b2b;
+}
 
+.player-button{
+  height: var(--side-card-height);
+  width: var(--side-card-height);
+}
+
+.score-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+#column-two{
+
+}
+
+.main-content-box{
+  width: 100%;
+  height: 100%;
+}
+
+.point-container{
+  display: grid;
+  grid-template-columns: auto auto;
+  align-content: space-between;
 }
