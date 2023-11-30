@@ -25,36 +25,41 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
         return onePlayer.cheese + (onePlayer.goudaCheese * 2) + (onePlayer.bleuCheese * 3)
     }
     function kingAndQueenBonus() {
+        let firstPlaceScore=0
         let firstPlace = []
+        let secondPlaceScore=0
         let secondPlace = []
         for (let i = 0; i < 7; i++) {
-            if ((players[i].chicken + players[i].rooster) > firstPlace) {
+            if ((players[i].chicken + players[i].rooster) > firstPlaceScore) {
+                firstPlaceScore = players[i].chicken + players[i].rooster
                 firstPlace = [players[i].playerNumber]
-            } else if ((players[i].chicken + players[i].rooster) === firstPlace) {
+            } else if ((players[i].chicken + players[i].rooster) === firstPlaceScore) {
                 firstPlace.push(players[i].playerNumber)
-            } else if ((players[i].chicken + players[i].rooster) > secondPlace) {
+            } else if ((players[i].chicken + players[i].rooster) > secondPlaceScore) {
+                secondPlaceScore = players[i].chicken + players[i].rooster
                 secondPlace = [players[i].playerNumber]
-            } else if ((players[i].chicken + players[i].rooster) === secondPlace) {
+            } else if ((players[i].chicken + players[i].rooster) === secondPlaceScore) {
                 secondPlace.push(players[i].playerNumber)
             }
         }
+        console.log(firstPlace)
         if (firstPlace.length > 1) {
             for(let i = 0; i< firstPlace.length; i++){
                 for (let item of Object.keys(scoreTally)) {
-                    if(typeof scoreTally[item] == firstPlace[i]){
+                    if('no' == firstPlace[i]){
                         scoreTally[item]+= Math.floor(15 / firstPlace.length)
                     }
                 }
             }
         } else {
             for (let item of Object.keys(scoreTally)) {
-                if(typeof scoreTally[item] == firstPlace[0]){
+                if('no' == firstPlace[0]){
                     scoreTally[item]+= 10
                 }
             }
             for(let i = 0; i< secondPlace.length; i++){
                 for (let item of Object.keys(scoreTally)) {
-                    if(typeof scoreTally[item] == secondPlace[i]){
+                    if('no' == secondPlace[i]){
                         scoreTally[item]+= Math.floor( 5 / secondPlace.length)
                     }
                 }
@@ -65,6 +70,13 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
     function getTotal(onePlayer) {
         return (onePlayer.apple * 2) + (onePlayer.chicken * 4) + (onePlayer.cheese * 3) + (onePlayer.bread * 3) + (onePlayer.pepper * 6) + (onePlayer.silk * 7) + (onePlayer.mead * 8) + (onePlayer.crossbow * 9) + (onePlayer.greenApples * 4) + (onePlayer.goldenApples * 6) + (onePlayer.goudaCheese * 6) + (onePlayer.bleuCheese * 9) + (onePlayer.ryeBread * 6) + (onePlayer.pumpernickelBread * 9) + (onePlayer.rooster * 8)
     }
+
+    useEffect(() => {
+      kingAndQueenBonus()
+      console.log('triggered')
+    
+    }, [])
+    
     return (
         <div>
             <div>
