@@ -1,6 +1,11 @@
 import React from 'react'
 
-const Player = ({ setPlayer, player }) => {
+const Player = ({ setPlayer, player, border }) => {
+    if(border === 1) {
+        document.documentElement.style.setProperty('--border-color', `black`)
+    } else {
+        document.documentElement.style.setProperty('--border-color', `white`)
+    }
     return (
         <div className='point-container'>
             <div className="point-box">
@@ -108,7 +113,7 @@ const Player = ({ setPlayer, player }) => {
             </div>
 
             <div className="point-box">
-                <p>Pumpernickel Bread: {player.pumpernickelBread}</p>
+                <p>Pumpernickel: {player.pumpernickelBread}</p>
                 <div className='clicker-box'>
                     <div className="clicker" onClick={() => setPlayer(player => ({...player, pumpernickelBread:player.pumpernickelBread+1}))}>+</div>
                     <div className="clicker" onClick={() => setPlayer(player => ({...player, pumpernickelBread:player.pumpernickelBread-1}))}>-</div>

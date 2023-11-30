@@ -79,7 +79,7 @@ const Main = () => {
     case 7:
       display =
         <div id="player-7-box" style={{backgroundColor: '#F2F2F2', color: '#111111'}} className='main-content-box'>
-          <Player setPlayer={setPlayer7} player={player7} />
+          <Player setPlayer={setPlayer7} player={player7} border={1} />
         </div>
       break;
     default:
@@ -95,7 +95,7 @@ const Main = () => {
         <div className="player-button side-card" style={{backgroundColor: "#D1AE5F"}} onClick={() => setRender(5)}></div>
         <div className="player-button side-card" style={{backgroundColor: "#876DBC"}} onClick={() => setRender(6)}></div>
         <div className="player-button side-card" style={{backgroundColor: "#F2F2F2"}} onClick={() => setRender(7)}></div>
-        <div className="score-button side-card"  onClick={() => setRender(0)}>FINAL SCORE</div>
+        <div className="score-button side-card"  onClick={() => setRender(0)}>SCORE</div>
       </div>
       <div id="column-two">
         {display}

@@ -7,6 +7,7 @@
 
 :root{
   --side-card-height: 0;
+  --border-color: white;
 }
 
 html{
@@ -58,4 +59,16 @@ body{
   display: grid;
   grid-template-columns: auto auto;
   align-content: space-between;
+}
+
+.point-box{
+  outline: 1px solid var(--border-color);
+  margin: 3px 5px;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+
+.clicker-box{
+  display: flex;
+  justify-content: space-evenly;
 }
