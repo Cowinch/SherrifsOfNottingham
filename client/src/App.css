@@ -22,6 +22,9 @@ body{
   display: flex;
   height: 100svh;
 }
+input{
+  width: 50px;
+}
 
 .inactive{
 

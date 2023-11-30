@@ -127,6 +127,10 @@ const Player = ({ setPlayer, player, border }) => {
                     <div className="clicker" onClick={() => setPlayer(player => ({...player, rooster:player.rooster-1}))}>-</div>
                 </div>
             </div>
+            <div className="point-box">
+                <label htmlFor="">Coins: </label>
+                <input type="number" value={player.coins} onChange={(e) => setPlayer({...player, coins: e.target.valueAsNumber})} />
+            </div>
         </div>
     )
 }

@@ -5,7 +5,6 @@ import Results from './Results'
 
 const Main = () => {
   document.documentElement.style.setProperty('--side-card-height', `${(((window.innerHeight-40) / 7))}px`)
-  let sideCardHeight = window.innerHeight/8
   let display
   let score = {
     'apple': 0,
@@ -23,6 +22,7 @@ const Main = () => {
     'ryeBread': 0,
     'pumpernickelBread': 0,
     'rooster': 0,
+    'coins' : 0,
     'playerNumber': ''
   }
   const [render, setRender] = useState(0)
