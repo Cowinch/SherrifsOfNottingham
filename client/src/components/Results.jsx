@@ -13,18 +13,18 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
         'player6': getTotal(player6) + chickenBonus(player6) + cheeseBonus(player6) + appleBonus(player6) + breadBonus(player6),
         'player7': getTotal(player7) + chickenBonus(player7) + cheeseBonus(player7) + appleBonus(player7) + breadBonus(player7)
     }
-    function tallyChicken(onePlayer) {
-        return onePlayer.chicken + (onePlayer.Rooster * 2)
-    }
-    function tallyApples(onePlayer) {
-        return onePlayer.apple + (onePlayer.greenApples * 2) + (onePlayer.goldenApples * 3)
-    }
-    function tallyBread(onePlayer) {
-        return onePlayer.bread + (onePlayer.ryeBread * 2) + (onePlayer.pumpernickelBread * 3)
-    }
-    function tallyCheese(onePlayer) {
-        return onePlayer.cheese + (onePlayer.goudaCheese * 2) + (onePlayer.bleuCheese * 3)
-    }
+    // function tallyChicken(onePlayer) {
+    //     return onePlayer.chicken + (onePlayer.Rooster * 2)
+    // }
+    // function tallyApples(onePlayer) {
+    //     return onePlayer.apple + (onePlayer.greenApples * 2) + (onePlayer.goldenApples * 3)
+    // }
+    // function tallyBread(onePlayer) {
+    //     return onePlayer.bread + (onePlayer.ryeBread * 2) + (onePlayer.pumpernickelBread * 3)
+    // }
+    // function tallyCheese(onePlayer) {
+    //     return onePlayer.cheese + (onePlayer.goudaCheese * 2) + (onePlayer.bleuCheese * 3)
+    // }
 
     function chickenBonus(onePlayer) {
         if(getTotal(onePlayer)<=0){
@@ -40,7 +40,10 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
                 firstPlace = [players[i].playerNumber]
             } else if ((players[i].chicken + (players[i].rooster * 2)) === firstPlaceScore) {
                 firstPlace.push(players[i].playerNumber)
-            } else if ((players[i].chicken + (players[i].rooster * 2)) > secondPlaceScore) {
+            }
+        }
+        for (let i = 0; i < 7; i++) {
+            if ((players[i].chicken + (players[i].rooster * 2)) > secondPlaceScore && (players[i].chicken + (players[i].rooster * 2)) < firstPlaceScore) {
                 secondPlaceScore = players[i].chicken + (players[i].rooster * 2)
                 secondPlace = [players[i].playerNumber]
             } else if ((players[i].chicken + (players[i].rooster * 2)) === secondPlaceScore) {
@@ -80,7 +83,10 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
                 firstPlace = [players[i].playerNumber]
             } else if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) === firstPlaceScore) {
                 firstPlace.push(players[i].playerNumber)
-            } else if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) > secondPlaceScore) {
+            }
+        }
+        for (let i = 0; i < 7; i++) {
+            if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) > secondPlaceScore && (players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) < firstPlaceScore) {
                 secondPlaceScore = players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)
                 secondPlace = [players[i].playerNumber]
             } else if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) === secondPlaceScore) {
@@ -119,7 +125,10 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
                 firstPlace = [players[i].playerNumber]
             } else if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) === firstPlaceScore) {
                 firstPlace.push(players[i].playerNumber)
-            } else if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) > secondPlaceScore) {
+            }
+        }
+        for (let i = 0; i < 7; i++) {
+            if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) > secondPlaceScore && (players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) < firstPlaceScore) {
                 secondPlaceScore = players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)
                 secondPlace = [players[i].playerNumber]
             } else if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) === secondPlaceScore) {
@@ -158,7 +167,10 @@ const Results = ({ player1, player2, player3, player4, player5, player6, player7
                 firstPlace = [players[i].playerNumber]
             } else if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) === firstPlaceScore) {
                 firstPlace.push(players[i].playerNumber)
-            } else if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) > secondPlaceScore) {
+            }
+        }
+        for (let i = 0; i < 7; i++) {
+            if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) > secondPlaceScore && (players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) < firstPlaceScore) {
                 secondPlaceScore = players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)
                 secondPlace = [players[i].playerNumber]
             } else if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) === secondPlaceScore) {
