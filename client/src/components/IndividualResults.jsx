@@ -21,7 +21,7 @@ const IndividualResults = ({ score, checklist, color }) => {
         <>
             {score > 0 ?
                 <div className='player-results-box'>
-                    <h1>{color}: {score}</h1>
+                    <h4>{color}: {score}</h4>
                     <div className='bonus-icon-container'>
                             {displayOneBonus(checklist.hasAppleKingBonus, checklist.hasAppleQueenBonus, 'Apple')}
                             {displayOneBonus(checklist.hasChickenKingBonus, checklist.hasChickenQueenBonus, 'Chicken')}
