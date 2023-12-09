@@ -48,12 +48,12 @@ input{
 
 #column-two{
   width: 100%;
-
 }
 
 .main-content-box{
   width: 100%;
   background-color: #202020;
+  height: 100%;
 }
 
 .point-container{
@@ -98,13 +98,16 @@ input{
 } */
 
 .results-box{
+  display: flex;
+  flex-direction: column;
 }
 
 .player-results-box{
   border: 1px solid white;
   border-radius: 10px;
   padding: 6px 10px;
-  margin: 6px 10px;
-  width: clamp(200px, 250px, 300px);
+  margin: 0 10px;
+  margin-bottom: 6px;
+  max-width: 300px;
   min-height: 70px;
 }
