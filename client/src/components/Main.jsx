@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import Player from './Player'
 import Results from './Results'
+import {CookiesProvider, useCookies} from 'react-cookie'
 
 const Main = () => {
   document.documentElement.style.setProperty('--side-card-height', `${(((window.innerHeight - 40) / 7))}px`)
@@ -34,6 +35,39 @@ const Main = () => {
   const [player5, setPlayer5] = useState({ ...score, playerNumber: 'player5' })
   const [player6, setPlayer6] = useState({ ...score, playerNumber: 'player6' })
   const [player7, setPlayer7] = useState({ ...score, playerNumber: 'player7' })
+  const [cookies, setCookie, removeCookie] = useCookies(['player1', 'player2', 'player3', 'player4', 'player5', 'player6', 'player7'])
+  useEffect(() => {
+    if(cookies){
+      setPlayer1(cookies.player1)
+      setPlayer2(cookies.player2)
+      setPlayer3(cookies.player3)
+      setPlayer4(cookies.player4)
+      setPlayer5(cookies.player5)
+      setPlayer6(cookies.player6)
+      setPlayer7(cookies.player7)
+    } else {
+      setCookie('player1', player1)
+      setCookie('player2', player2)
+      setCookie('player3', player3)
+      setCookie('player4', player4)
+      setCookie('player5', player5)
+      setCookie('player6', player6)
+      setCookie('player7', player7)
+    }
+  }, [])
+  
+  useEffect(() => {
+      setCookie('player1', player1)
+      setCookie('player2', player2)
+      setCookie('player3', player3)
+      setCookie('player4', player4)
+      setCookie('player5', player5)
+      setCookie('player6', player6)
+      setCookie('player7', player7)
+  }, [player1, player2, player3, player4, player5, player6, player7])
+
+
+
   switch (render) {
     case 1:
       display =
