@@ -21,13 +21,10 @@ body{
 #main{
   display: flex;
   height: 100svh;
+  width: 100%;
 }
 input{
   width: 50px;
-}
-
-.inactive{
-
 }
 
 #column-one{
@@ -50,12 +47,12 @@ input{
 }
 
 #column-two{
+  width: 100%;
 
 }
 
 .main-content-box{
   width: 100%;
-  height: 100%;
   background-color: #202020;
 }
 
@@ -92,6 +89,7 @@ input{
 
 .bonus-icon-container{
   display: flex;
+  gap: clamp(3px, 5px, 10px);
 }
 
 /* .icon-row{
@@ -100,4 +98,13 @@ input{
 } */
 
 .results-box{
+}
+
+.player-results-box{
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin: 6px 10px;
+  width: clamp(200px, 250px, 300px);
+  min-height: 70px;
 }
