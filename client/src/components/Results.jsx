@@ -1,233 +1,327 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-
+import IndividualResults from './IndividualResults'
 const Results = ({ player1, player2, player3, player4, player5, player6, player7 }) => {
+    const appleScore = 2,
+        chickenScore = 4,
+        cheeseScore = 3,
+        breadScore = 3,
+        pepperScore = 6,
+        silkScore = 7,
+        meadScore = 8,
+        crossbowScore = 9,
+        greenApplesScore = 4,
+        goldenApplesScore = 6,
+        goudaCheeseScore = 6,
+        bleuCheeseScore = 9,
+        ryeBreadScore = 6,
+        pumpernickelScore = 9,
+        roosterScore = 8,
+        firstTierRoyaltyMultiplier = 2,
+        secondTierRoyaltyMultiplier = 3,
+        appleKingBonusValue = 20,
+        appleQueenBonusValue = 10,
+        chickenKingBonusValue = 10,
+        chickenQueenBonusValue = 5,
+        cheeseKingBonusValue = 15,
+        cheeseQueenBonusValue = 10,
+        breadKingBonusValue = 15,
+        breadQueenBonusValue = 10
+    let bonusChecklist = {
+        'player1': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+        'player2': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+        'player3': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+        'player4': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+        'player5': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+        'player6': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+        'player7': {
+            'hasAppleKingBonus': false,
+            'hasAppleQueenBonus': false,
+            'hasChickenKingBonus': false,
+            'hasChickenQueenBonus': false,
+            'hasCheeseKingBonus': false,
+            'hasCheeseQueenBonus': false,
+            'hasBreadKingBonus': false,
+            'hasBreadQueenBonus': false,
+        },
+    }
     let players = [player1, player2, player3, player4, player5, player6, player7]
     let scoreTally = {}
-    scoreTally = {
-        'player1': getTotal(player1) + chickenBonus(player1) + cheeseBonus(player1) + appleBonus(player1) + breadBonus(player1),
-        'player2': getTotal(player2) + chickenBonus(player2) + cheeseBonus(player2) + appleBonus(player2) + breadBonus(player2),
-        'player3': getTotal(player3) + chickenBonus(player3) + cheeseBonus(player3) + appleBonus(player3) + breadBonus(player3),
-        'player4': getTotal(player4) + chickenBonus(player4) + cheeseBonus(player4) + appleBonus(player4) + breadBonus(player4),
-        'player5': getTotal(player5) + chickenBonus(player5) + cheeseBonus(player5) + appleBonus(player5) + breadBonus(player5),
-        'player6': getTotal(player6) + chickenBonus(player6) + cheeseBonus(player6) + appleBonus(player6) + breadBonus(player6),
-        'player7': getTotal(player7) + chickenBonus(player7) + cheeseBonus(player7) + appleBonus(player7) + breadBonus(player7)
+    let bonusWinners = {
+        'appleWinners': {
+            'firstPlaceWinners': [],
+            'secondPlaceWinners': []
+        },
+        'chickenWinners': {
+            'firstPlaceWinners': [],
+            'secondPlaceWinners': []
+        },
+        'cheeseWinners': {
+            'firstPlaceWinners': [],
+            'secondPlaceWinners': []
+        },
+        'breadWinners': {
+            'firstPlaceWinners': [],
+            'secondPlaceWinners': []
+        },
     }
-    // function tallyChicken(onePlayer) {
-    //     return onePlayer.chicken + (onePlayer.Rooster * 2)
-    // }
-    // function tallyApples(onePlayer) {
-    //     return onePlayer.apple + (onePlayer.greenApples * 2) + (onePlayer.goldenApples * 3)
-    // }
-    // function tallyBread(onePlayer) {
-    //     return onePlayer.bread + (onePlayer.ryeBread * 2) + (onePlayer.pumpernickelBread * 3)
-    // }
-    // function tallyCheese(onePlayer) {
-    //     return onePlayer.cheese + (onePlayer.goudaCheese * 2) + (onePlayer.bleuCheese * 3)
-    // }
 
-    function chickenBonus(onePlayer) {
-        if(getTotal(onePlayer)<=0){
-            return 0
-        }
+    function tallyApples(onePlayer) {
+        return onePlayer.apple + (onePlayer.greenApples * firstTierRoyaltyMultiplier) + (onePlayer.goldenApples * secondTierRoyaltyMultiplier)
+    }
+    function tallyChicken(onePlayer) {
+        return onePlayer.chicken + (onePlayer.rooster * firstTierRoyaltyMultiplier)
+    }
+    function tallyCheese(onePlayer) {
+        return onePlayer.cheese + (onePlayer.goudaCheese * firstTierRoyaltyMultiplier) + (onePlayer.bleuCheese * secondTierRoyaltyMultiplier)
+    }
+    function tallyBread(onePlayer) {
+        return onePlayer.bread + (onePlayer.ryeBread * firstTierRoyaltyMultiplier) + (onePlayer.pumpernickelBread * secondTierRoyaltyMultiplier)
+    }
+
+    function tallyBonus(oneGoodsScore) {
         let firstPlaceScore = 1
-        let firstPlace = []
+        let firstPlaceWinners = []
         let secondPlaceScore = 1
-        let secondPlace = []
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].chicken + (players[i].rooster * 2)) > firstPlaceScore) {
-                firstPlaceScore = players[i].chicken + (players[i].rooster * 2)
-                firstPlace = [players[i].playerNumber]
-            } else if ((players[i].chicken + (players[i].rooster * 2)) === firstPlaceScore) {
-                firstPlace.push(players[i].playerNumber)
+        let secondPlaceWinners = []
+        for (let i = 0; i < players.length; i++) {
+            if (oneGoodsScore(players[i]) > firstPlaceScore) {
+                firstPlaceScore = oneGoodsScore(players[i])
+                firstPlaceWinners = [players[i].playerNumber]
+            } else if (oneGoodsScore(players[i]) === firstPlaceScore) {
+                firstPlaceWinners.push(players[i].playerNumber)
             }
         }
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].chicken + (players[i].rooster * 2)) > secondPlaceScore && (players[i].chicken + (players[i].rooster * 2)) < firstPlaceScore) {
-                secondPlaceScore = players[i].chicken + (players[i].rooster * 2)
-                secondPlace = [players[i].playerNumber]
-            } else if ((players[i].chicken + (players[i].rooster * 2)) === secondPlaceScore) {
-                secondPlace.push(players[i].playerNumber)
+        for (let i = 0; i < players.length; i++) {
+            if (oneGoodsScore(players[i]) > secondPlaceScore && oneGoodsScore(players[i]) < firstPlaceScore) {
+                secondPlaceScore = oneGoodsScore(players[i])
+                secondPlaceWinners = [players[i].playerNumber]
+            } else if (oneGoodsScore(players[i]) === secondPlaceScore && oneGoodsScore(players[i]) < firstPlaceScore) {
+                secondPlaceWinners.push(players[i].playerNumber)
             }
         }
-        if (firstPlace.length > 1) {
-            for (let i = 0; i < firstPlace.length; i++) {
-                if (onePlayer.playerNumber == firstPlace[i]) {
-                    return Math.floor(15 / firstPlace.length)
+        return {
+            'firstPlaceWinners': firstPlaceWinners,
+            'secondPlaceWinners': secondPlaceWinners
+        }
+
+    }
+
+    function distributeBonus(onePlayer, winners, firstPlaceReward, secondPlaceReward) {
+        if (winners.firstPlaceWinners.length > 1) {
+            for (let i = 0; i < winners.firstPlaceWinners.length; i++) {
+                if (onePlayer.playerNumber === winners.firstPlaceWinners[i]) {
+                    return Math.floor((firstPlaceReward + secondPlaceReward) / winners.firstPlaceWinners.length)
                 }
             }
-        } else if (firstPlace.length == 1) {
-            if (onePlayer.playerNumber == firstPlace[0])
-                return 10
-            for (let i = 0; i < secondPlace.length; i++) {
-                if (onePlayer.playerNumber == secondPlace[i]) {
-                    return Math.floor(5 / secondPlace.length)
+        } else if (winners.firstPlaceWinners.length === 1) {
+            if (onePlayer.playerNumber === winners.firstPlaceWinners[0]) {
+                return firstPlaceReward
+            }
+            for (let i = 0; i < winners.secondPlaceWinners.length; i++) {
+                if (onePlayer.playerNumber === winners.secondPlaceWinners[i]) {
+                    return Math.floor(secondPlaceReward / winners.secondPlaceWinners.length)
                 }
             }
         }
         return 0
     }
 
-    function breadBonus(onePlayer) {
-        if(getTotal(onePlayer)<=0){
-            return 0
+    function hasBonus(playerNumber, winnersArray) {
+        for (let i = 0; i < winnersArray.length; i++) {
+            if (winnersArray[i] === playerNumber) return true
         }
-        let firstPlaceScore = 1
-        let firstPlace = []
-        let secondPlaceScore = 1
-        let secondPlace = []
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) > firstPlaceScore) {
-                console.log('triggered')
-                firstPlaceScore = players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)
-                firstPlace = [players[i].playerNumber]
-            } else if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) === firstPlaceScore) {
-                firstPlace.push(players[i].playerNumber)
-            }
-        }
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) > secondPlaceScore && (players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) < firstPlaceScore) {
-                secondPlaceScore = players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)
-                secondPlace = [players[i].playerNumber]
-            } else if ((players[i].bread + (players[i].ryeBread * 2) + (players[i].pumpernickelBread * 3)) === secondPlaceScore) {
-                secondPlace.push(players[i].playerNumber)
-            }
-        }
-        if (firstPlace.length > 1) {
-            for (let i = 0; i < firstPlace.length; i++) {
-                if (onePlayer.playerNumber == firstPlace[i]) {
-                    return Math.floor(25 / firstPlace.length)
-                }
-            }
-        } else if (firstPlace.length == 1) {
-            if (onePlayer.playerNumber == firstPlace[0])
-                return 15
-            for (let i = 0; i < secondPlace.length; i++) {
-                if (onePlayer.playerNumber == secondPlace[i]) {
-                    return Math.floor(10 / secondPlace.length)
-                }
-            }
-        }
-        return 0
-    }
-
-    function appleBonus(onePlayer) {
-        if(getTotal(onePlayer)<=0){
-            return 0
-        }
-        let firstPlaceScore = 1
-        let firstPlace = []
-        let secondPlaceScore = 1
-        let secondPlace = []
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) > firstPlaceScore) {
-                firstPlaceScore = players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)
-                firstPlace = [players[i].playerNumber]
-            } else if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) === firstPlaceScore) {
-                firstPlace.push(players[i].playerNumber)
-            }
-        }
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) > secondPlaceScore && (players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) < firstPlaceScore) {
-                secondPlaceScore = players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)
-                secondPlace = [players[i].playerNumber]
-            } else if ((players[i].apple + (players[i].greenApples * 2) + (players[i].goldenApples * 3)) === secondPlaceScore) {
-                secondPlace.push(players[i].playerNumber)
-            }
-        }
-        if (firstPlace.length > 1) {
-            for (let i = 0; i < firstPlace.length; i++) {
-                if (onePlayer.playerNumber == firstPlace[i]) {
-                    return Math.floor(30 / firstPlace.length)
-                }
-            }
-        } else if (firstPlace.length == 1) {
-            if (onePlayer.playerNumber == firstPlace[0])
-                return 20
-            for (let i = 0; i < secondPlace.length; i++) {
-                if (onePlayer.playerNumber == secondPlace[i]) {
-                    return Math.floor(10 / secondPlace.length)
-                }
-            }
-        }
-        return 0
-    }
-
-    function cheeseBonus(onePlayer) {
-        if(getTotal(onePlayer)<=0){
-            return 0
-        }
-        let firstPlaceScore = 1
-        let firstPlace = []
-        let secondPlaceScore = 1
-        let secondPlace = []
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) > firstPlaceScore) {
-                firstPlaceScore = players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)
-                firstPlace = [players[i].playerNumber]
-            } else if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) === firstPlaceScore) {
-                firstPlace.push(players[i].playerNumber)
-            }
-        }
-        for (let i = 0; i < 7; i++) {
-            if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) > secondPlaceScore && (players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) < firstPlaceScore) {
-                secondPlaceScore = players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)
-                secondPlace = [players[i].playerNumber]
-            } else if ((players[i].cheese + (players[i].goudaCheese * 2) + (players[i].bleuCheese * 3)) === secondPlaceScore) {
-                secondPlace.push(players[i].playerNumber)
-            }
-        }
-        if (firstPlace.length > 1) {
-            for (let i = 0; i < firstPlace.length; i++) {
-                if (onePlayer.playerNumber == firstPlace[i]) {
-                    return Math.floor(25 / firstPlace.length)
-                }
-            }
-        } else if (firstPlace.length == 1) {
-            if (onePlayer.playerNumber == firstPlace[0])
-                return 15
-            for (let i = 0; i < secondPlace.length; i++) {
-                if (onePlayer.playerNumber == secondPlace[i]) {
-                    return Math.floor(10 / secondPlace.length)
-                }
-            }
-        }
-        return 0
+        return false
     }
 
     function getTotal(onePlayer) {
-        return (onePlayer.apple * 2) + (onePlayer.chicken * 4) + (onePlayer.cheese * 3) + (onePlayer.bread * 3) + (onePlayer.pepper * 6) + (onePlayer.silk * 7) + (onePlayer.mead * 8) + (onePlayer.crossbow * 9) + (onePlayer.greenApples * 4) + (onePlayer.goldenApples * 6) + (onePlayer.goudaCheese * 6) + (onePlayer.bleuCheese * 9) + (onePlayer.ryeBread * 6) + (onePlayer.pumpernickelBread * 9) + (onePlayer.rooster * 8) + onePlayer.coins
+        return (onePlayer.apple * appleScore) + (onePlayer.chicken * chickenScore) + (onePlayer.cheese * cheeseScore) + (onePlayer.bread * breadScore) + (onePlayer.pepper * pepperScore) + (onePlayer.silk * silkScore) + (onePlayer.mead * meadScore) + (onePlayer.crossbow * crossbowScore) + (onePlayer.greenApples * greenApplesScore) + (onePlayer.goldenApples * goldenApplesScore) + (onePlayer.goudaCheese * goudaCheeseScore) + (onePlayer.bleuCheese * bleuCheeseScore) + (onePlayer.ryeBread * ryeBreadScore) + (onePlayer.pumpernickelBread * pumpernickelScore) + (onePlayer.rooster * roosterScore) + onePlayer.coins
+    }
+
+    bonusWinners.appleWinners = tallyBonus(tallyApples)
+    bonusWinners.chickenWinners = tallyBonus(tallyChicken)
+    bonusWinners.cheeseWinners = tallyBonus(tallyCheese)
+    bonusWinners.breadWinners = tallyBonus(tallyBread)
+
+    scoreTally = {
+        'player1': getTotal(player1) +
+            distributeBonus(player1, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player1, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player1, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player1, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue),
+
+        'player2': getTotal(player2) +
+            distributeBonus(player2, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player2, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player2, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player2, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue),
+
+        'player3': getTotal(player3) +
+            distributeBonus(player3, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player3, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player3, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player3, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue),
+
+        'player4': getTotal(player4) +
+            distributeBonus(player4, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player4, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player4, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player4, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue),
+
+        'player5': getTotal(player5) +
+            distributeBonus(player5, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player5, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player5, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player5, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue),
+
+        'player6': getTotal(player6) +
+            distributeBonus(player6, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player6, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player6, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player6, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue),
+
+        'player7': getTotal(player7) +
+            distributeBonus(player7, bonusWinners.appleWinners, appleKingBonusValue, appleQueenBonusValue) +
+            distributeBonus(player7, bonusWinners.chickenWinners, chickenKingBonusValue, chickenQueenBonusValue) +
+            distributeBonus(player7, bonusWinners.cheeseWinners, cheeseKingBonusValue, cheeseQueenBonusValue) +
+            distributeBonus(player7, bonusWinners.breadWinners, breadKingBonusValue, breadQueenBonusValue)
+    }
+
+    bonusChecklist = {
+        'player1': {
+            'hasAppleKingBonus': hasBonus(player1.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player1.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player1.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player1.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player1.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player1.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player1.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player1.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
+        'player2': {
+            'hasAppleKingBonus': hasBonus(player2.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player2.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player2.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player2.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player2.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player2.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player2.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player2.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
+        'player3': {
+            'hasAppleKingBonus': hasBonus(player3.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player3.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player3.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player3.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player3.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player3.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player3.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player3.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
+        'player4': {
+            'hasAppleKingBonus': hasBonus(player4.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player4.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player4.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player4.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player4.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player4.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player4.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player4.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
+        'player5': {
+            'hasAppleKingBonus': hasBonus(player5.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player5.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player5.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player5.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player5.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player5.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player5.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player5.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
+        'player6': {
+            'hasAppleKingBonus': hasBonus(player6.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player6.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player6.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player6.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player6.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player6.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player6.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player6.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
+        'player7': {
+            'hasAppleKingBonus': hasBonus(player7.playerNumber, bonusWinners.appleWinners.firstPlaceWinners),
+            'hasAppleQueenBonus': hasBonus(player7.playerNumber, bonusWinners.appleWinners.secondPlaceWinners),
+            'hasChickenKingBonus': hasBonus(player7.playerNumber, bonusWinners.chickenWinners.firstPlaceWinners),
+            'hasChickenQueenBonus': hasBonus(player7.playerNumber, bonusWinners.chickenWinners.secondPlaceWinners),
+            'hasCheeseKingBonus': hasBonus(player7.playerNumber, bonusWinners.cheeseWinners.firstPlaceWinners),
+            'hasCheeseQueenBonus': hasBonus(player7.playerNumber, bonusWinners.cheeseWinners.secondPlaceWinners),
+            'hasBreadKingBonus': hasBonus(player7.playerNumber, bonusWinners.breadWinners.firstPlaceWinners),
+            'hasBreadQueenBonus': hasBonus(player7.playerNumber, bonusWinners.breadWinners.secondPlaceWinners),
+        },
     }
 
     return (
-        <div>
-            <div>
-                {scoreTally.player1 > 0 ? <h1>Black: {scoreTally.player1}</h1> : ''}
-            </div>
-
-            <div>
-                {scoreTally.player2 > 0 ? <h1>Green: {scoreTally.player2}</h1> : ''}
-            </div>
-
-            <div>
-                {scoreTally.player3 > 0 ? <h1>Blue: {scoreTally.player3}</h1> : ''}
-            </div>
-
-            <div>
-                {scoreTally.player4 > 0 ? <h1>Red: {scoreTally.player4}</h1> : ''}
-            </div>
-
-            <div>
-                {scoreTally.player5 > 0 ? <h1>Yellow: {scoreTally.player5}</h1> : ''}
-            </div>
-
-            <div>
-                {scoreTally.player6 > 0 ? <h1>Purple: {scoreTally.player6}</h1> : ''}
-            </div>
-
-            <div>
-                {scoreTally.player7 > 0 ? <h1>Guest: {scoreTally.player7}</h1> : ''}
-            </div>
+        <div className='results-box'>
+            <IndividualResults score={scoreTally.player1} checklist={bonusChecklist.player1} color={'Black'}/>
+            <IndividualResults score={scoreTally.player2} checklist={bonusChecklist.player2} color={'Green'}/>
+            <IndividualResults score={scoreTally.player3} checklist={bonusChecklist.player3} color={'Blue'}/>
+            <IndividualResults score={scoreTally.player4} checklist={bonusChecklist.player4} color={'Red'}/>
+            <IndividualResults score={scoreTally.player5} checklist={bonusChecklist.player5} color={'Yellow'}/>
+            <IndividualResults score={scoreTally.player6} checklist={bonusChecklist.player6} color={'Purple'}/>
+            <IndividualResults score={scoreTally.player7} checklist={bonusChecklist.player7} color={'Guest'}/>
         </div>
     )
 }
