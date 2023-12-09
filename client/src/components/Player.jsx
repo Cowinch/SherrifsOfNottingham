@@ -1,4 +1,5 @@
 import React from 'react'
+import ItemCard from './ItemCard'
 
 const Player = ({ setPlayer, player, border }) => {
     if(border === 1) {
@@ -8,13 +9,7 @@ const Player = ({ setPlayer, player, border }) => {
     }
     return (
         <div className='point-container'>
-            <div className="point-box">
-                <p>Apple: {player.apple}</p>
-                <div className='clicker-box'>
-                    <div className="clicker" onClick={() => setPlayer(player => ({...player, apple:player.apple+1}))}>+</div>
-                    <div className="clicker" onClick={() => setPlayer(player => ({...player, apple:player.apple-1}))}>-</div>
-                </div>
-            </div>
+            <ItemCard item={player.apple} setItem={setPlayer}/>
 
             <div className="point-box">
                 <p>Chicken: {player.chicken}</p>
